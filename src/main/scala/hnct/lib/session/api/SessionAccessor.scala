@@ -9,7 +9,6 @@ trait SessionAccessor {
 	 * Return the accessor specification of this accessor
 	 */
 	def accessorSpec : SessionAccessorSpecification
-	protected def accessorSpec_=[T <: SessionAccessorSpecification](spec : T)
 	
 	/**
 	 * Read the value corresponding to the key

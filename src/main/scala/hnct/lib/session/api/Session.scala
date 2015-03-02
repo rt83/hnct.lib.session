@@ -13,6 +13,8 @@ package hnct.lib.session.api
  */
 trait Session {
 	
+	type SpecType <: SessionAccessorSpecification
+	
 	/**
 	 * Configure the Session
 	 */
@@ -32,6 +34,6 @@ trait Session {
 	/**
 	 * Return an accessor to access the session
 	 */
-	def accessor() : SessionAccessor
+	def accessor(spec : SpecType) : SessionAccessor
 	
 }
