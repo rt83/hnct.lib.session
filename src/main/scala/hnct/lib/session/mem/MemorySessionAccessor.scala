@@ -1,10 +1,10 @@
-package hnct.lib.session.redis
+package hnct.lib.session.mem
 
 import hnct.lib.session.api.SessionAccessor
-import hnct.lib.session.api.SessionAccessorSpecification
 import hnct.lib.session.api.SessionValue
+import hnct.lib.session.api.SessionAccessorSpecification
 
-class RedisSessionAccessor(val accessorSpec : SessionAccessorSpecification) extends SessionAccessor {
+class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification) extends SessionAccessor {
 
 	def expiration(key: String): Long = {
 		???
@@ -29,11 +29,4 @@ class RedisSessionAccessor(val accessorSpec : SessionAccessorSpecification) exte
 	def write[A](key: String, value: SessionValue[A]): SessionAccessor = {
 		???
 	}
-  
-}
-
-object RedisSessionAccessor {
-	
-	def apply(spec : SessionAccessorSpecification) = new RedisSessionAccessor(spec)
-	
 }

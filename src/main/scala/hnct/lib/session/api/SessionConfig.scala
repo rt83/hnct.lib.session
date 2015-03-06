@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo._
  * @field autoRenewOnAccess whether or not a field is renew when it is read
  */
 @JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="_class")	// to include the config type in the json
-class SessionConfig(var timeout : Int, var autoRenewOnAccess : Boolean) {
+class SessionConfig(var timeout : Int, var autoRenewOnAccess : Boolean, var sessionClass : String) {
 	
-	def this() = this(-1, false)
+	def this() = this(-1, false, "")
 	
 }

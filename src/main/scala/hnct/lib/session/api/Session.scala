@@ -10,6 +10,10 @@ package hnct.lib.session.api
  * 
  * e.g. initialize the connection pool to redis server, check whether a session file
  * is in the file system, etc...
+ * 
+ * IMPORTANT: all Session subtypes must provide a default constructor so that it can be
+ * created from the class name
+ * 
  */
 trait Session {
 	
