@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonTypeInfo._
 
 @JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="_class")
-class MemorySessionConfig extends SessionConfig {
-
+class MemorySessionConfig(sessionClass : String) extends SessionConfig(sessionClass) {
+	
+	def this() = this(classOf[MemorySession].getName)
+	
 }

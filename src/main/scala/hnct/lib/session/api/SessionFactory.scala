@@ -18,13 +18,8 @@ object SessionFactory {
 				classOf[SessionFactoryConfig], 
 				ConfigurationFormat.JSON
 	).
-	fold({
-		/*throw exception if not found the session configuration*/
-		throw new RuntimeException("Could not load the session configuration file")
-	})({config => 
-		// return the config if read successfully
-		config
-	})
+	// throw exception when cannot read the configuration file successfully
+	getOrElse(throw new RuntimeException("Could not load the session configuration file"))
 	
 	// build the session from the configuration
 	config.units.foreach { unit =>

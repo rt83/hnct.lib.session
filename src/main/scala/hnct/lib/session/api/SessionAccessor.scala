@@ -15,7 +15,7 @@ trait SessionAccessor {
 	 * @return the SessionValue object, containing the value of the specified key and the time until this
 	 * key will expire
 	 */
-	def read[A](key : String) : SessionValue[A]
+	def read[A](key : String) : Option[SessionValue[A]]
 	
 	/**
 	 * Get the amount of time left till a key expire
@@ -29,12 +29,6 @@ trait SessionAccessor {
 	def write[A](key : String, value : SessionValue[A]) : SessionAccessor
 	
 	/**
-	 * Write a value with a particular ttl to the session
-	 * @return this SessionAccessor
-	 */
-	def write[A](key : String, value : SessionValue[A], ttl : Long) : SessionAccessor
-	
-	/**
 	 * Renew the ttl of a key. The ttl value previously set for this key will be used
 	 * 
 	 * E.g a key was written with ttl = 10s and it is now 7s since the writing when we call
@@ -44,9 +38,9 @@ trait SessionAccessor {
 	def renew(key : String) : Boolean
 	
 	/**
-	 * Set the new ttl value for a key
+	 * Set the new ttl value for a key, and renew it
 	 * @return this SessionAccessor
 	 */
-	def expire(key : String, ttl : Long) : SessionAccessor
+	def expire(key : String, ttl : Long) : Boolean
 	
 }

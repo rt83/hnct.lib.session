@@ -5,27 +5,27 @@ import com.redis._
 
 class RedisSession extends Session {
 	
-	type SpecType = SessionAccessorSpecification
+	type ConfigType = RedisSessionConfig
 	
-	var config : RedisSessionConfig = RedisSessionConfig()	// initialize the config
+	override var _config = new RedisSessionConfig()	// initialize the config
 	var clientPools : RedisClientPool = null
 	
-	def configure(c: SessionConfig): Unit = {
+	override def configure(c: SessionConfig): Unit = {
 		c match {
-			case x : RedisSessionConfig => config = x
+			case x : RedisSessionConfig => super.configure(_config)
 			case _ => throw new RuntimeException("Configuration type not supported! Only configuration of type RedisSessionConfig is accepted!")
 		}
 	}
 
-	def destroy(): Unit = {
-		
+	override def destroy(): Unit = {
+		clientPools.close
 	}
 
-	def initialize(): Unit = {
+	override def initialize(): Unit = {
 		
-		if (config.serverSet.isEmpty) return
+		if (_config.serverSet.isEmpty) return
 		
-		val firstServer = config.serverSet(0)
+		val firstServer = _config.serverSet(0)
 		
 		clientPools = new RedisClientPool(firstServer.host, firstServer.port)
 		

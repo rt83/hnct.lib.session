@@ -17,27 +17,31 @@ package hnct.lib.session.api
  */
 trait Session {
 	
-	type SpecType <: SessionAccessorSpecification
+	type ConfigType <: SessionConfig
+	
+	protected var _config : ConfigType
 	
 	/**
 	 * Configure the Session
+	 * All session that implement this trait and overidde this function
+	 * needs to call super.configure
 	 */
-	def configure(config : SessionConfig) : Unit
+	def configure(config : SessionConfig) : Unit = _config = config.asInstanceOf[ConfigType]
 	
 	/**
 	 * Allow the user to initialize the session
 	 */
-	def initialize() : Unit
+	def initialize() : Unit = {}
 	
 	/**
 	 * Allow the user to destroy the session
 	 * When destroying, all data should be removed from the storage
 	 */
-	def destroy() : Unit
+	def destroy() : Unit = {}
 	
 	/**
 	 * Return an accessor to access the session
 	 */
-	def accessor(spec : SpecType) : SessionAccessor
+	def accessor(spec : SessionAccessorSpecification) : SessionAccessor
 	
 }

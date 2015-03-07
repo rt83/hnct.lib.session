@@ -10,19 +10,15 @@ class RedisSessionAccessor(val accessorSpec : SessionAccessorSpecification) exte
 		???
 	}
 
-	def expire(key: String, ttl: Long): SessionAccessor = {
+	def expire(key: String, ttl: Long): Boolean = {
 		???
 	}
 
-	def read[A](key: String): SessionValue[A] = {
+	def read[A](key: String): Option[SessionValue[A]] = {
 		???
 	}
 
 	def renew(key: String): Boolean = {
-		???
-	}
-
-	def write[A](key: String, value: SessionValue[A], ttl: Long): SessionAccessor = {
 		???
 	}
 

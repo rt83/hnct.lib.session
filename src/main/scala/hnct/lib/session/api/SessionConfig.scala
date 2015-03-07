@@ -12,6 +12,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo._
 @JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="_class")	// to include the config type in the json
 class SessionConfig(var timeout : Int, var autoRenewOnAccess : Boolean, var sessionClass : String) {
 	
-	def this() = this(-1, false, "")
+	def this(sessionClass : String) = this(-1, false, sessionClass)
 	
 }

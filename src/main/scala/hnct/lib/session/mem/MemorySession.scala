@@ -4,24 +4,31 @@ import hnct.lib.session.api.Session
 import hnct.lib.session.api.SessionAccessorSpecification
 import hnct.lib.session.api.SessionAccessor
 import hnct.lib.session.api.SessionConfig
+import hnct.lib.session.api.SessionValue
+
+import scala.collection._
 
 class MemorySession extends Session {
-	type SpecType = SessionAccessorSpecification
+	
+	type ConfigType = MemorySessionConfig
+	
+	var valueMap = mutable.HashMap[String, SessionValue[_]]()
+	
+	override var _config = new MemorySessionConfig()	// initialize the _config
+	
+	def accessor(spec: SessionAccessorSpecification): SessionAccessor = new MemorySessionAccessor(spec, valueMap)
 
-	def accessor(spec: SpecType): SessionAccessor = {
-		???
+	override def configure(config: SessionConfig): Unit = {
+		
+		config match {
+			case c : MemorySessionConfig => super.configure(c)
+			case _ => throw new RuntimeException("Cannot configure memory session config with object of type "+config.getClass.getName)
+		}
+
 	}
 
-	def configure(config: SessionConfig): Unit = {
-		???
-	}
-
-	def destroy(): Unit = {
-		???
-	}
-
-	def initialize(): Unit = {
-		???
+	override def destroy(): Unit = {
+		valueMap.clear()
 	}
 
 }
