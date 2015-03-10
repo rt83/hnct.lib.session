@@ -24,6 +24,14 @@ trait SessionAccessor {
 	
 	/**
 	 * Write a value with unlimited expiration to the session
+	 * 
+	 * When using the write method, the session value object can be created
+	 * using implicit conversion defined in the SessionValue object
+	 * 
+	 * If we use write(key, value) the value object will be converted to SessionValue with unlimited time to live
+	 * 
+	 * If we use write (key, (value, 1234)) the tuple (value, 1234) will be converted to SessionValue with ttl = 1234
+	 * 
 	 * @return this SessionAccessor
 	 */
 	def write[A](key : String, value : SessionValue[A]) : SessionAccessor
