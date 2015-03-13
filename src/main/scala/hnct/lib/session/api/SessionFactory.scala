@@ -9,10 +9,10 @@ object SessionFactory {
 	private val configFileName = "session.json"
 	private val systemPropName = "sessionConfigFile"
 	
-	var sMap = mutable.HashMap[String, Session]()
+	private var sMap = mutable.HashMap[String, Session]()
 	
 	// read the configuration
-	val config = Configuration.read(
+	private val config = Configuration.read(
 				Some(configFileName), 
 				Some(systemPropName), 
 				classOf[SessionFactoryConfig], 
