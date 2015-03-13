@@ -16,7 +16,7 @@ class SessionValue[A](val value : A, var ttl : Long, var created : Long) {
 		this(value, SessionValue.UNLIMITED)
 	}
 	
-	def isExpired = System.currentTimeMillis() - created > ttl
+	def isExpired = ttl > 0 && System.currentTimeMillis() - created > ttl
 	
 	def renew = created = System.currentTimeMillis()
 	

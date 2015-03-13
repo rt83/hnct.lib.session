@@ -24,7 +24,7 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 	 * Return negative if the key is found and already expired
 	 */
 	def expiration(key: String): Long = { valueMap.
-		get(key).
+		get(_rK(key)).
 		filterNot(_.isExpired).
 		fold(-1.toLong)(value => value.ttl - System.currentTimeMillis() + value.created)
 	}
@@ -34,7 +34,7 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 	 * and at the same time, renew it
 	 */
 	def expire(key: String, ttl: Long): Boolean = { valueMap.
-		get(key).
+		get(_rK(key)).
 		filterNot(_.isExpired).
 		fold(false)({ value =>
 			value.renew
@@ -43,27 +43,35 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 		})
 	}
 
-	def read[A](key: String): Option[SessionValue[A]] = { valueMap.
-		get(key).					// get the option out of the map
+	def read[A](key: String): Option[SessionValue[A]] = { 
+		valueMap.
+		get(_rK(key)).					// get the option out of the map
 		filterNot(_.isExpired).		// check if the session value is expired or not
-		map(_.asInstanceOf[A])		// if not expire, convert it to type A and return
+		map(
+			_.asInstanceOf[A]
+		)		// if not expire, convert it to type A and return
 	}
 
 	/**
 	 * Renew the key, change the created time to current time
 	 */
 	def renew(key: String): Boolean = { valueMap.
-		get(key).					// get the option out of the map
+		get(_rK(key)).					// get the option out of the map
 		filterNot(_.isExpired).
 		fold(false)({ value =>
 			value.renew
 			true
 		})
 	}
+	
+	/**
+	 * Transform the short key to the formatted key
+	 */
+	private[this] def _rK(key : String) : String = _k.format(accessorSpec.namespace, accessorSpec.sessionName, key)
 
 	def write[A](key: String, value: SessionValue[A]): SessionAccessor = {
-		val rK = _k.format(accessorSpec.namespace, accessorSpec.sessionName, key)	// get the real key
-		valueMap + (rK -> value)
+		valueMap += (_rK(key) -> value)
+
 		this	// return this so we can chain the call and write multiple values in one line
 	}
 }

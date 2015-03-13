@@ -30,5 +30,7 @@ class MemorySession extends Session {
 	override def destroy(): Unit = {
 		valueMap.clear()
 	}
+	
+	// TODO: a regular thread to remove expired session key
 
 }

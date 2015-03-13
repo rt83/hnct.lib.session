@@ -33,7 +33,7 @@ object SessionFactory {
 		
 		session.configure(unit.config)
 		
-		sMap + (unit.name -> session)
+		sMap += (unit.name -> session)
 	}
 	
 	// validation to see whether the default session unit exist
