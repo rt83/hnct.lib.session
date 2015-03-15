@@ -25,6 +25,10 @@ class RedisSessionAccessor(val accessorSpec : SessionAccessorSpecification) exte
 	def write[A](key: String, value: SessionValue[A]): SessionAccessor = {
 		???
 	}
+
+	def delete(key: String): Boolean = {
+		???
+	}
   
 }
 

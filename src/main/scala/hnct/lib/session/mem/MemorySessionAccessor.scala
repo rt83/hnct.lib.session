@@ -48,7 +48,7 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 		get(_rK(key)).					// get the option out of the map
 		filterNot(_.isExpired).		// check if the session value is expired or not
 		map(
-			_.asInstanceOf[A]
+			_.asInstanceOf[SessionValue[A]]
 		)		// if not expire, convert it to type A and return
 	}
 
@@ -70,8 +70,17 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 	private[this] def _rK(key : String) : String = _k.format(accessorSpec.namespace, accessorSpec.sessionName, key)
 
 	def write[A](key: String, value: SessionValue[A]): SessionAccessor = {
+		
 		valueMap += (_rK(key) -> value)
 
 		this	// return this so we can chain the call and write multiple values in one line
 	}
+
+	def delete(key: String): Boolean = {
+		valueMap -= _rK(key)
+		
+		true
+	}
+	
+	
 }

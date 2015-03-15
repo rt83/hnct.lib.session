@@ -47,8 +47,14 @@ trait SessionAccessor {
 	
 	/**
 	 * Set the new ttl value for a key, and renew it
-	 * @return this SessionAccessor
+	 * @return true if successful, otherwise false
 	 */
 	def expire(key : String, ttl : Long) : Boolean
+	
+	/**
+	 * delete a particular key
+	 * @return true if successful otherwise false
+	 */
+	def delete(key : String) : Boolean
 	
 }
