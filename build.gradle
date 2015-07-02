@@ -10,10 +10,10 @@ ext.scalaVersion = "2.11.1"
 dependencies {
 	
 	projDependency ':hnct.lib.config'
-	prod 'hnct.lib:hnct.lib.config:1.0.0'
+	prod 'hnct:hnct.lib.config:1.0.0'
 	
 	projDependency ':hnct.lib.utility'
-	prod 'hnct.lib:hnct.lib.utility:1.0.0'
+	prod 'hnct:hnct.lib.utility:1.0.0'
 	
 	// redis dependencies
 	compile 'redis.clients:jedis:2.4.2'
