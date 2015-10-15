@@ -3,7 +3,7 @@ package hnct.lib.session.mem
 import hnct.lib.session.api.SessionAccessor
 
 import hnct.lib.session.api.SessionValue
-import hnct.lib.session.api.SessionAccessorSpecification
+import hnct.lib.session.api.SessionAccessorConfig
 
 import scala.collection._
 
@@ -14,7 +14,7 @@ import scala.collection._
  * accessorSpec method from SessionAccessor, because of this
  * we don't have to declare def accessorSpec explicitly
  */
-class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, valueMap : mutable.HashMap[String, SessionValue[_]]) extends SessionAccessor {
+class MemorySessionAccessor(val configuration : SessionAccessorConfig, valueMap : mutable.HashMap[String, SessionValue[_]]) extends SessionAccessor {
 
 	val _k = "%s:%s:%s"	// key format
 	
@@ -33,7 +33,7 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 	 * change the time to live of the key
 	 * and at the same time, renew it
 	 */
-	def expire(key: String, ttl: Long): Boolean = { valueMap.
+	def newExpireTime(key: String, ttl: Long): Boolean = { valueMap.
 		get(_rK(key)).
 		filterNot(_.isExpired).
 		fold(false)({ value =>
@@ -67,7 +67,7 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 	/**
 	 * Transform the short key to the formatted key
 	 */
-	private[this] def _rK(key : String) : String = _k.format(accessorSpec.namespace, accessorSpec.sessionName, key)
+	private[this] def _rK(key : String) : String = _k.format(configuration.namespace, configuration.sessionName, key)
 
 	def write[A](key: String, value: SessionValue[A]): SessionAccessor = {
 		
@@ -81,6 +81,9 @@ class MemorySessionAccessor(val accessorSpec : SessionAccessorSpecification, val
 		
 		true
 	}
-	
+
+  def config: SessionAccessorConfig = {
+	  ???
+	}
 	
 }

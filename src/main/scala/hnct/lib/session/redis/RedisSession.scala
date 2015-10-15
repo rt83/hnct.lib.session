@@ -31,6 +31,6 @@ class RedisSession extends Session {
 		
 	}
 
-	def accessor(spec: SessionAccessorSpecification) = RedisSessionAccessor(spec)
+	def accessor(spec: SessionAccessorConfig) = RedisSessionAccessor(spec)
 
 }

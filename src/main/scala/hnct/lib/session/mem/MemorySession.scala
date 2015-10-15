@@ -1,7 +1,7 @@
 package hnct.lib.session.mem
 
 import hnct.lib.session.api.Session
-import hnct.lib.session.api.SessionAccessorSpecification
+import hnct.lib.session.api.SessionAccessorConfig
 import hnct.lib.session.api.SessionAccessor
 import hnct.lib.session.api.SessionConfig
 import hnct.lib.session.api.SessionValue
@@ -16,7 +16,7 @@ class MemorySession extends Session {
 	
 	override var _config = new MemorySessionConfig()	// initialize the _config
 	
-	def accessor(spec: SessionAccessorSpecification): SessionAccessor = new MemorySessionAccessor(spec, valueMap)
+	def accessor(spec: SessionAccessorConfig): SessionAccessor = new MemorySessionAccessor(spec, valueMap)
 
 	override def configure(config: SessionConfig): Unit = {
 		

@@ -42,6 +42,6 @@ trait Session {
 	/**
 	 * Return an accessor to access the session
 	 */
-	def accessor(spec : SessionAccessorSpecification) : SessionAccessor
+	def accessor(spec : SessionAccessorConfig) : SessionAccessor
 	
 }

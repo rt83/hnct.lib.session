@@ -6,9 +6,9 @@ package hnct.lib.session.api
 trait SessionAccessor {
 	
 	/**
-	 * Return the accessor specification of this accessor
+	 * Return the accessor config of this accessor
 	 */
-	def accessorSpec : SessionAccessorSpecification
+	def config : SessionAccessorConfig
 	
 	/**
 	 * Read the value corresponding to the key
@@ -49,7 +49,7 @@ trait SessionAccessor {
 	 * Set the new ttl value for a key, and renew it
 	 * @return true if successful, otherwise false
 	 */
-	def expire(key : String, ttl : Long) : Boolean
+	def newExpireTime(key : String, ttl : Long) : Boolean
 	
 	/**
 	 * delete a particular key
