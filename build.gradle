@@ -15,6 +15,9 @@ dependencies {
 	projDependency ':hnct.lib.utility'
 	prod 'hnct:hnct.lib.utility:1.0.0'
 	
+	projDependency ':hnct.lib.mongodb'
+	prod 'hnct:hnct.lib.mongodb:1.0.0'
+	
 	// redis dependencies
 	compile 'redis.clients:jedis:2.4.2'
 	
