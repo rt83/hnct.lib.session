@@ -6,14 +6,14 @@ import hnct.lib.session.apiv2.SessionValueCode
 
 class MemSess extends Session {
   
-  def readValue[A](key: String): Tuple2[SessionValueCode, Option[A]] = {
+  def readValue[A](key: String): Either[SessionValueCode, Option[A]] = {
     data.get(key) match {
-      case None => (SessionValueCode.NOT_FOUND, None)
+      case None => Left(SessionValueCode.NOT_FOUND)
       case Some(sv) =>
-        if (isExpired) (SessionValueCode.EXPIRED, None)
+        if (isExpired) Left(SessionValueCode.EXPIRED)
         else {
           renew
-          (SessionValueCode.OK, sv.asInstanceOf[SessionValue[A]].readValue)
+          Right(sv.asInstanceOf[SessionValue[A]].readValue)
         }
     }
   }
