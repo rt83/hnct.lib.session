@@ -1,7 +1,7 @@
 package hnct.lib.session
 
 import hnct.lib.session.impl.MemSess
-import hnct.lib.session.apiv2.SessionValueCode
+import hnct.lib.session.apiv2.SessionCode
 
 object Test {
   
@@ -14,9 +14,9 @@ object Test {
 	  ms.writeValue("a", User("a"))
 	  ms.writeValue("b", Client("b"))
 	  val userName = ms.readValue[User]("a") match {
-	    case (SessionValueCode.NOT_FOUND, None) => "Not found"
-	    case (SessionValueCode.EXPIRED, None) => "Expired"
-	    case (_, Some(name)) => name
+	    case Left(SessionCode.NOT_FOUND) => "Not found"
+	    case Left(SessionCode.SESSION_EXPIRED) => "Expired"
+	    case Right(name) => name
 	  }
 	  println(userName)
 	  println(ms.ttl)

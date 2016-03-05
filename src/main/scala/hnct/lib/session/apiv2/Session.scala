@@ -14,7 +14,7 @@ abstract class Session extends TTL {
    * Get a session value based on its key.
    * This operation must renew TTL of the session
    */
-  def readValue[A](key: String): Either[SessionValueCode, Option[A]]
+  def readValue[A](key: String): Either[SessionCode, A]
   
   /**
    * Write a value into session. Value is overriden if exists.

@@ -2,18 +2,23 @@ package hnct.lib.session.impl
 
 import hnct.lib.session.apiv2.Session
 import hnct.lib.session.apiv2.SessionValue
-import hnct.lib.session.apiv2.SessionValueCode
+import hnct.lib.session.apiv2.SessionCode
 
 class MemSess extends Session {
   
-  def readValue[A](key: String): Either[SessionValueCode, Option[A]] = {
+  def readValue[A](key: String): Either[SessionCode, A] = {
     data.get(key) match {
-      case None => Left(SessionValueCode.NOT_FOUND)
+      case None => Left(SessionCode.NOT_FOUND)
       case Some(sv) =>
-        if (isExpired) Left(SessionValueCode.EXPIRED)
+        if (isExpired) Left(SessionCode.SESSION_EXPIRED)
         else {
           renew
-          Right(sv.asInstanceOf[SessionValue[A]].readValue)
+          sv.asInstanceOf[SessionValue[A]].readValue match {
+            case None =>
+              Left(SessionCode.VALUE_EXPIRED)
+            case Some(value) =>
+              Right(value)
+          }
         }
     }
   }
