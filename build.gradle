@@ -22,8 +22,8 @@ dependencies {
 	compile 'redis.clients:jedis:2.4.2'
 	
 	// playframework dependencies
-	compile 'com.typesafe.play:play_2.11:2.4.0-M3'
-	compile 'com.typesafe.play:play-java_2.11:2.4.0-M3'
+	//compile 'com.typesafe.play:play_2.11:2.4.0-M3'
+	//compile 'com.typesafe.play:play-java_2.11:2.4.0-M3'
 	
 	compile "net.debasishg:redisclient_${strip_minor(scalaVersion)}:2.13"	// have to use double quote for string interpolation
 
