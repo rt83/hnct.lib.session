@@ -13,15 +13,4 @@ package hnct.lib.session.api
  * This accessor config tell the accessor to access data with keys prefix by userData:userA. An example
  * key will be userData:userA:lastLogin
  **/
- class SessionAccessorConfig(val namespace : String, val sessionName : String) {
-	
-}
-
-/**
- * Allow convenient creation of SessionAccessorConfig without new operator
- */
-object SessionAccessorConfig {
-	
-	def apply(namespace : String, sessionName : String) = new SessionAccessorConfig(namespace, sessionName)
-	
-}
+case class AccessorDescriptor(val namespace : String, val sessionName : String)

@@ -18,13 +18,19 @@ dependencies {
 	projDependency ':hnct.lib.mongodb'
 	prod 'hnct:hnct.lib.mongodb:1.0.0'
 	
-	// redis dependencies
-	compile 'redis.clients:jedis:2.4.2'
+
+	compile 'com.hazelcast:hazelcast:3.7.1'	
 	
-	// playframework dependencies
-	//compile 'com.typesafe.play:play_2.11:2.4.0-M3'
-	//compile 'com.typesafe.play:play-java_2.11:2.4.0-M3'
+	// https://mvnrepository.com/artifact/biz.paluch.redis/lettuce
+	compile group: 'biz.paluch.redis', name: 'lettuce', version: '4.2.2.Final'
 	
 	compile "net.debasishg:redisclient_${strip_minor(scalaVersion)}:2.13"	// have to use double quote for string interpolation
+	
+	// https://mvnrepository.com/artifact/com.google.inject/guice
+	compile group: 'com.google.inject', name: 'guice', version: '4.0'
+	// https://mvnrepository.com/artifact/com.google.inject.extensions/guice-multibindings
+	compile group: 'com.google.inject.extensions', name: 'guice-multibindings', version: '4.0'
+	// https://mvnrepository.com/artifact/com.google.inject.extensions/guice-assistedinject
+	compile group: 'com.google.inject.extensions', name: 'guice-assistedinject', version: '4.0'
 
 }

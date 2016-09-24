@@ -1,36 +1,31 @@
 package hnct.lib.session.mem
 
 import hnct.lib.session.api.Session
-import hnct.lib.session.api.SessionAccessorConfig
+import hnct.lib.session.api.AccessorDescriptor
 import hnct.lib.session.api.SessionAccessor
 import hnct.lib.session.api.SessionConfig
 import hnct.lib.session.api.SessionValue
-
 import scala.collection._
+import com.google.inject.assistedinject.Assisted
+import com.google.inject.Inject
+import hnct.lib.session.api.SessionFactory
 
-class MemorySession extends Session {
-	
-	type ConfigType = MemorySessionConfig
+class MemorySession @Inject() (@Assisted() val config : SessionConfig) extends Session {
 	
 	var valueMap = mutable.HashMap[String, SessionValue[_]]()
 	
-	override var _config = new MemorySessionConfig()	// initialize the _config
-	
-	def accessor(spec: SessionAccessorConfig): SessionAccessor = new MemorySessionAccessor(spec, valueMap)
-
-	override def configure(config: SessionConfig): Unit = {
-		
-		config match {
-			case c : MemorySessionConfig => super.configure(c)
-			case _ => throw new RuntimeException("Cannot configure memory session config with object of type "+config.getClass.getName)
-		}
-
-	}
+	override def accessor(spec: AccessorDescriptor): SessionAccessor = new MemorySessionAccessor(spec, valueMap)
 
 	override def destroy(): Unit = {
 		valueMap.clear()
 	}
 	
+	override def initialize() : Unit = {
+		
+	}
+	
 	// TODO: a regular thread to remove expired session key
 
 }
+
+trait MemSessionFactory extends SessionFactory

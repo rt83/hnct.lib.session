@@ -1,0 +1,17 @@
+{
+	"defaultUnit" : "mem",
+	"units" : [
+		{
+			"name" : "mem",
+			"config" : {
+				"_class" : "hnct.lib.session.mem.MemorySessionConfig",
+				"sessionClass" : "hnct.lib.session.mem.MemorySession",
+				"timeOut" : -1,
+				"autoRenewOnAccess" : true
+			}
+		}
+	],
+	"implementations" : [
+		"hnct.lib.session.mem.MemSessionModule"
+	]
+}
