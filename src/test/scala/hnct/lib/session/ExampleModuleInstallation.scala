@@ -30,6 +30,13 @@ object ExampleModuleInstallation {
 			println(value)
 		}
 		
+		accessor.write("testKey", SessionValue(true, 3000)). // write a value
+			flatMap { success =>	
+	
+				accessor.expiration("testKey")	// after finish, find out what is the ttl
+	
+			} map (println(_))						// print out the ttl
+		
 		Thread.sleep(5000);
 	}
 	
