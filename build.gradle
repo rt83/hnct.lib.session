@@ -9,14 +9,11 @@ ext.scalaVersion = "2.11.1"
 
 dependencies {
 	
-	projDependency ':hnct.lib.config'
-	prod 'hnct:hnct.lib.config:1.0.0'
+	projDependency ':hnct.lib.config', 'hnct:hnct.lib.config:1.0.0-SNAPSHOT', true
 	
-	projDependency ':hnct.lib.utility'
-	prod 'hnct:hnct.lib.utility:1.0.0'
+	projDependency ':hnct.lib.utility', 'hnct:hnct.lib.utility:1.0.0-SNAPSHOT', true
 	
-	projDependency ':hnct.lib.mongodb'
-	prod 'hnct:hnct.lib.mongodb:1.0.0'
+	projDependency ':hnct.lib.mongodb', 'hnct:hnct.lib.mongodb:1.0.0-SNAPSHOT', true
 	
 
 	compile 'com.hazelcast:hazelcast:3.7.1'	
