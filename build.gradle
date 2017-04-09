@@ -12,11 +12,8 @@ dependencies {
 	projDependency ':hnct.lib.config', 'hnct:hnct.lib.config:1.0.0-SNAPSHOT', true
 	
 	projDependency ':hnct.lib.utility', 'hnct:hnct.lib.utility:1.0.0-SNAPSHOT', true
-	
-	projDependency ':hnct.lib.mongodb', 'hnct:hnct.lib.mongodb:1.0.0-SNAPSHOT', true
-	
 
-	compile 'com.hazelcast:hazelcast:3.7.1'	
+	compile 'com.hazelcast:hazelcast:3.7.1'
 	
 	// https://mvnrepository.com/artifact/biz.paluch.redis/lettuce
 	compile group: 'biz.paluch.redis', name: 'lettuce', version: '4.2.2.Final'
