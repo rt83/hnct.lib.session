@@ -49,7 +49,7 @@ class MemorySessionAccessor(val configuration : AccessorDescriptor, var valueMap
 			)
 	}
 
-	def read[A](key: String): Future[Option[SessionValue[A]]] = { 
+	def read[A](key: String): Future[Option[SessionValue[A]]] = {
 		Future.successful(
 			valueMap.
 				get(_rK(key)).					// get the option out of the map
@@ -83,7 +83,7 @@ class MemorySessionAccessor(val configuration : AccessorDescriptor, var valueMap
 	def write[A](key: String, value: SessionValue[A]): Future[Boolean] = {
 		
 		valueMap += (_rK(key) -> value)
-		
+
 		Future.successful(true)
 	}
 
@@ -94,7 +94,7 @@ class MemorySessionAccessor(val configuration : AccessorDescriptor, var valueMap
 	}
 
   def config: AccessorDescriptor = {
-	  ???
+	  configuration
 	}
 	
 }
