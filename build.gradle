@@ -5,7 +5,7 @@
 version = "1.0.0"
 group = "hnct"
 
-ext.scalaVersion = "2.11.8"
+ext.scalaVersion = "2.12.4"
 
 dependencies {
 	
@@ -13,12 +13,12 @@ dependencies {
 	
 	projDependency ':hnct.lib.utility', 'hnct:hnct.lib.utility:1.0.0-SNAPSHOT', true
 
-	compile 'com.hazelcast:hazelcast:3.7.1'
+	// compile 'com.hazelcast:hazelcast:3.7.1'
 	
 	// https://mvnrepository.com/artifact/biz.paluch.redis/lettuce
-	compile group: 'biz.paluch.redis', name: 'lettuce', version: '4.2.2.Final'
+	// compile group: 'biz.paluch.redis', name: 'lettuce', version: '4.2.2.Final'
 	
-	compile "net.debasishg:redisclient_${strip_minor(scalaVersion)}:2.13"	// have to use double quote for string interpolation
+	// compile "net.debasishg:redisclient_${strip_minor(scalaVersion)}:2.13"	// have to use double quote for string interpolation
 	
 	// https://mvnrepository.com/artifact/com.google.inject/guice
 	compile group: 'com.google.inject', name: 'guice', version: '4.0'
