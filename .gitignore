@@ -6,3 +6,6 @@
 .settings
 .cache-main
 .cache-tests
+/*.iml
+/*.ipr
+/*.iws
