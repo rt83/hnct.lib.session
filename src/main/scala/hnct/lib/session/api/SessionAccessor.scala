@@ -7,7 +7,7 @@ trait SessionAccessor {
 	/**
 	 * Return the accessor config of this accessor
 	 */
-	def config : AccessorDescriptor
+	def descriptor : AccessorDescriptor
 	
 	/**
 	 * Read the value corresponding to the key

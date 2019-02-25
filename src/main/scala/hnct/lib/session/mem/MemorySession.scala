@@ -14,7 +14,7 @@ class MemorySession @Inject() (@Assisted() val config : SessionConfig) extends S
 	
 	var valueMap = mutable.HashMap[String, SessionValue[_]]()
 	
-	override def accessor(spec: AccessorDescriptor): SessionAccessor = new MemorySessionAccessor(spec, valueMap)
+	override def accessor(spec: AccessorDescriptor): SessionAccessor = new MemorySessionAccessor(config.asInstanceOf[MemorySessionConfig], spec, valueMap)
 
 	override def destroy(): Unit = {
 		valueMap.clear()
